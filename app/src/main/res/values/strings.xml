@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Lemonade_app</string>
+    <string name="text1">Lemon tree</string>
+    <string name="text2">Lemon Squeeze</string>
+    <string name="text3">Lemon Drink</string>
+    <string name="text4">Lemon Restart</string>
 </resources>

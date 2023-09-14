@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,9 +20,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.lemonade_app.ui.theme.Lemonade_appTheme
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +55,13 @@ fun Greeting(modifier: Modifier = Modifier) {
         else-> R.drawable.lemon_restart
     }
 
+    val textResource = when(result){
+        1-> R.string.text1
+        2-> R.string.text2
+        3-> R.string.text3
+        else-> R.string.text4
+    }
+
 
     Column(Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
@@ -59,11 +70,28 @@ fun Greeting(modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(id =imageResource),
             contentDescription = null,
-            modifier = Modifier.clickable{result+=1}
+            modifier = Modifier.clickable{if (result < 4) {
+
+                // declare a variable and generate a random number
+                // if the number <5 let is stay in 2 otherwise decrement
+                if (result ==2){
+                    val randomValue = Random.nextInt(1, 9) // Random value between 1 and 8
+                    if (randomValue < 5) {
+                        result = 2
+                    }
+                    else result=2-1
+                    }
+                // Here we increment the result
+                result += 1
+
+                // this part will bring the image back to the beginning
+            } else {
+                result = 1
+            }}
         )
         Text(
-            text = "Tap the lemon tree to select a lemon",
-            modifier = modifier
+            text = stringResource(id = textResource),
+            modifier = Modifier.padding(16.dp)
         )
     }
 }
